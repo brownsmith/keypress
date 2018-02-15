@@ -12,24 +12,18 @@ function presses(phrase) {
   ];
 
   findValueInArray = (letter, array) => {
-    // var letter = letter;
-    // var result = '';
-    // var moo = '';
+    if (letter === ' ') {
+      return 1;
+    }
     array.filter(function(arrayItem) {
       result = arrayItem.find(function(arrayletter) {
-        // console.log(arrayletter); // A B C ...
-        // console.log(letter); // L O L
-        // console.log(arrayItem); // ['A', 'B', 'C'] ...
-
-        // console.log(letter === arrayletter ? arrayItem.indexOf(letter) + 1 : false);
-        var ooo = letter === arrayletter ? arrayItem.indexOf(letter) + 1 : false;
-        if (ooo) {
-          moo = ooo;
+        var letterIndex = letter === arrayletter ? arrayItem.indexOf(letter) + 1 : false;
+        if (letterIndex) {
+          amountOfKeyPresses = letterIndex;
         }
       });
     });
-    // console.log(moo);
-    return moo;
+    return amountOfKeyPresses;
   }
 
   var message = phrase.split('');
@@ -37,22 +31,30 @@ function presses(phrase) {
   var hmmm;
 
   message.forEach(function(letter){
-    // console.log(findValueInArray(letter, keyArray));
     someArray.push(findValueInArray(letter, keyArray));
   });
   
   const reducer = (accumulator, currentValue) => accumulator + currentValue;
 
   return someArray.reduce(reducer);
-  // return message;
 }
-
-// it('should split the phrase into characters and add them to an array', () => {
-//   const pressesFunc = presses('LOL');
-//   expect(pressesFunc).toEqual(['L', 'O', 'L']);
-// });
 
 it('should return the position of each letter in their array added together', () => {
   const pressesFunc = presses('LOL');
   expect(pressesFunc).toEqual(9);
+});
+
+it('should return the position of each letter in their array added together', () => {
+  const pressesFunc = presses('PAUL');
+  expect(pressesFunc).toEqual(7);
+});
+
+it('should return the position of each letter in their array added together', () => {
+  const pressesFunc = presses('BROWNSMITH');
+  expect(pressesFunc).toEqual(22);
+});
+
+it('should add 1 for a space', () => {
+  const pressesFunc = presses('PAUL BROWNSMITH');
+  expect(pressesFunc).toEqual(30);
 });
