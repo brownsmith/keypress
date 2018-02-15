@@ -33,17 +33,24 @@ function presses(phrase) {
   }
 
   var message = phrase.split('');
+  var someArray = [];
+  var hmmm;
+
   message.forEach(function(letter){
-    console.log(findValueInArray(letter, keyArray));
-    findValueInArray(letter, keyArray);
+    // console.log(findValueInArray(letter, keyArray));
+    someArray.push(findValueInArray(letter, keyArray));
   });
-  return message;
+  
+  const reducer = (accumulator, currentValue) => accumulator + currentValue;
+
+  return someArray.reduce(reducer);
+  // return message;
 }
 
-it('should split the phrase into characters and add them to an array', () => {
-  const pressesFunc = presses('LOL');
-  expect(pressesFunc).toEqual(['L', 'O', 'L']);
-});
+// it('should split the phrase into characters and add them to an array', () => {
+//   const pressesFunc = presses('LOL');
+//   expect(pressesFunc).toEqual(['L', 'O', 'L']);
+// });
 
 it('should return the position of each letter in their array added together', () => {
   const pressesFunc = presses('LOL');
