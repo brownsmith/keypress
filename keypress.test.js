@@ -10,10 +10,14 @@ function presses(phrase) {
     ['T', 'U', 'V'],
     ['W', 'X', 'Y', 'Z']
   ];
-  return phrase;
+  var message = phrase.split('');
+  message.forEach(function(letter){
+    console.log(letter);
+  });
+  return message;
 }
 
-it('should return the phrase', () => {
+it('should split the phrase into characters and add them to an array', () => {
   const pressesFunc = presses('LOL');
-  expect(pressesFunc).toEqual('LOL');
+  expect(pressesFunc).toEqual(['L', 'O', 'L']);
 });
