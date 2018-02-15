@@ -13,7 +13,7 @@ function presses(phrase) {
   return phrase;
 }
 
-it('should return the number of keypresses as 9', () => {
+it('should return the phrase', () => {
   const pressesFunc = presses('LOL');
   expect(pressesFunc).toEqual('LOL');
 });
