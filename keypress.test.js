@@ -55,7 +55,12 @@ it('should return 22 for the name \'BROWNSMITH\'', () => {
   expect(pressesFunc).toEqual(22);
 });
 
-it('should return 30 for the name \'PAUL BROWNSMITH\'', () => {
+it('should handle spaces by returning 30 for the name \'PAUL BROWNSMITH\'', () => {
   const pressesFunc = presses('PAUL BROWNSMITH');
   expect(pressesFunc).toEqual(30);
+});
+
+it('should handle numbers by returning 17 for the phrase \'C U L8R\'', () => {
+  const pressesFunc = presses('C U L8R');
+  expect(pressesFunc).toEqual(17);
 });
