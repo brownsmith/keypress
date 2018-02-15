@@ -1,14 +1,15 @@
 function presses(phrase) {
   var keyArray = [
-    [],
-    ['A', 'B', 'C'],
-    ['D', 'E', 'F'],
-    ['G', 'H', 'I'],
-    ['J', 'K', 'L'],
-    ['M', 'N', 'O'],
-    ['P', 'Q', 'R', 'S'],
-    ['T', 'U', 'V'],
-    ['W', 'X', 'Y', 'Z']
+    ['1'],
+    ['A', 'B', 'C', '2'],
+    ['D', 'E', 'F', '3'],
+    ['G', 'H', 'I', '4'],
+    ['J', 'K', 'L', '5'],
+    ['M', 'N', 'O', '6'],
+    ['P', 'Q', 'R', 'S', '7'],
+    ['T', 'U', 'V', '8'],
+    ['W', 'X', 'Y', 'Z', '9'],
+    [' ', '0']
   ];
 
   findValueInArray = (letter, array) => {
@@ -39,22 +40,22 @@ function presses(phrase) {
   return someArray.reduce(reducer);
 }
 
-it('should return the position of each letter in their array added together', () => {
+it('should return 9 for the word \'LOL\'', () => {
   const pressesFunc = presses('LOL');
   expect(pressesFunc).toEqual(9);
 });
 
-it('should return the position of each letter in their array added together', () => {
+it('should return 7 for the name \'PAUL\'', () => {
   const pressesFunc = presses('PAUL');
   expect(pressesFunc).toEqual(7);
 });
 
-it('should return the position of each letter in their array added together', () => {
+it('should return 22 for the name \'BROWNSMITH\'', () => {
   const pressesFunc = presses('BROWNSMITH');
   expect(pressesFunc).toEqual(22);
 });
 
-it('should add 1 for a space', () => {
+it('should return 30 for the name \'PAUL BROWNSMITH\'', () => {
   const pressesFunc = presses('PAUL BROWNSMITH');
   expect(pressesFunc).toEqual(30);
 });
