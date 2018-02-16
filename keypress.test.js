@@ -1,5 +1,5 @@
-function presses(phrase) {
-  const keyArray = [
+function keyboardArray() {
+  return [
     ['1'],
     ['A', 'B', 'C', '2'],
     ['D', 'E', 'F', '3'],
@@ -11,14 +11,19 @@ function presses(phrase) {
     ['W', 'X', 'Y', 'Z', '9'],
     [' ', '0']
   ];
+}
+
+function presses(phrase) {
+  const keyArray = keyboardArray();
+  const message = phrase.toUpperCase().split('');
+  const resultArray = [];
 
   findValueInArray = (letterInMessage, array) => {
     let amountOfKeyPresses;
-    if (letterInMessage === ' ') {
-      return 1;
-    }
+    letterInMessage === ' ' ? 1 : letterInMessage;
+
     array.filter(function(arrayItem) {
-      result = arrayItem.find(function(arrayletter) {
+      arrayItem.find(function(arrayletter) {
         const letterIndex = letterInMessage === arrayletter ? arrayItem.indexOf(letterInMessage) + 1 : false;
         if (letterIndex) {
           amountOfKeyPresses = letterIndex;
@@ -28,15 +33,22 @@ function presses(phrase) {
     return amountOfKeyPresses;
   }
 
-  const message = phrase.split('');
-  const resultArray = [];
-
   message.forEach(function(letterInMessage){
     resultArray.push(findValueInArray(letterInMessage, keyArray));
   });
   
   return resultArray.reduce((accumulator, currentValue) => accumulator + currentValue);
 }
+
+it('should allow input in lower case', () => {
+  const pressesFunc = presses('hello');
+  expect(pressesFunc).toEqual(13);
+});
+
+it('should allow input in lower case with spaces', () => {
+  const pressesFunc = presses('c u l8r');
+  expect(pressesFunc).toEqual(17);
+});
 
 it('should return 9 for the word \'LOL\'', () => {
   const pressesFunc = presses('LOL');
