@@ -1,5 +1,5 @@
 function presses(phrase) {
-  var keyArray = [
+  const keyArray = [
     ['1'],
     ['A', 'B', 'C', '2'],
     ['D', 'E', 'F', '3'],
@@ -12,13 +12,14 @@ function presses(phrase) {
     [' ', '0']
   ];
 
-  findValueInArray = (letter, array) => {
-    if (letter === ' ') {
+  findValueInArray = (letterInMessage, array) => {
+    let amountOfKeyPresses;
+    if (letterInMessage === ' ') {
       return 1;
     }
     array.filter(function(arrayItem) {
       result = arrayItem.find(function(arrayletter) {
-        var letterIndex = letter === arrayletter ? arrayItem.indexOf(letter) + 1 : false;
+        const letterIndex = letterInMessage === arrayletter ? arrayItem.indexOf(letterInMessage) + 1 : false;
         if (letterIndex) {
           amountOfKeyPresses = letterIndex;
         }
@@ -27,17 +28,14 @@ function presses(phrase) {
     return amountOfKeyPresses;
   }
 
-  var message = phrase.split('');
-  var someArray = [];
-  var hmmm;
+  const message = phrase.split('');
+  const resultArray = [];
 
-  message.forEach(function(letter){
-    someArray.push(findValueInArray(letter, keyArray));
+  message.forEach(function(letterInMessage){
+    resultArray.push(findValueInArray(letterInMessage, keyArray));
   });
   
-  const reducer = (accumulator, currentValue) => accumulator + currentValue;
-
-  return someArray.reduce(reducer);
+  return resultArray.reduce((accumulator, currentValue) => accumulator + currentValue);
 }
 
 it('should return 9 for the word \'LOL\'', () => {
@@ -60,7 +58,22 @@ it('should handle spaces by returning 30 for the name \'PAUL BROWNSMITH\'', () =
   expect(pressesFunc).toEqual(30);
 });
 
+it('should handle spaces by returning 23 for the phrase \'AS YOU WERE\'', () => {
+  const pressesFunc = presses('AS YOU WERE');
+  expect(pressesFunc).toEqual(23);
+});
+
 it('should handle numbers by returning 17 for the phrase \'C U L8R\'', () => {
   const pressesFunc = presses('C U L8R');
   expect(pressesFunc).toEqual(17);
+});
+
+it('should handle numbers by returning 11 for the phrase \'C3PO\'', () => {
+  const pressesFunc = presses('C3PO');
+  expect(pressesFunc).toEqual(11);
+});
+
+it('should handle numbers by returning 12 for the phrase \'R2D2\'', () => {
+  const pressesFunc = presses('R2D2');
+  expect(pressesFunc).toEqual(12);
 });
